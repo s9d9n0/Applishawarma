@@ -1,0 +1,53 @@
+
+p {
+    padding: 10px;
+    margin: 15px;
+    font-size:xx-large;
+    font-style: italic;
+}
+
+table {
+    border-spacing: 1px;
+    width: 80%;
+    padding: 10px;
+    margin: 0 10 0 10;
+    border: 1px solid black;
+}
+
+th {
+    cursor: pointer;
+    padding: 5px;
+    color:white;
+    font-weight: bold;
+    background-color: #088880;
+}
+th.heure {
+    font-size:15px;
+}
+
+td {
+    text-align: left;
+    padding: 1px;
+    border-spacing: 5px;
+    border: 1px solid white;
+    white-space: nowrap;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.largeur {
+    width:auto;
+}
+
+.transparent {
+    vertical-align: bottom;
+    text-align: center;
+    height: 30px;
+    font-size:15px;
+    border-left-color: 5px solid white;
+    color: black; /*transparent;*/
+    /* padding:2px; */
+    /* background-image: linear-gradient(to top, #FF0000FF 20%, #FFFFFFFF 21%); */
+}
