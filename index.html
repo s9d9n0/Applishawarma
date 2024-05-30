@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"  content="width=device-width, initial-scale=1.0">
+    <title>DocASv3</title>
+    <link rel="stylesheet" href="./style_ASv3.css"/>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+    crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+      crossorigin="anonymous"></script> -->
+      <link rel="icon" type="image/x-icon" href="img/favicon-gepex.png">
+</head>
+<body>
+
+    <p>Niveaux de consommation VV d'AppliShawarmaV3 ( Net-KEBApp )</p>
+
+    <div id="dateRef"></div>
+    
+    <br />
+
+    <form name="my-form" action="">
+        <label>Veuillez choisir un quartier :</label>
+        <select id="quartier" name="quartier">
+            <option value="" selected>Selection...</option>
+            <option value="AP">AP - Services aux applications</option>
+            <option value="CN">CN - Comptabilité nationale</option>
+            <option value="CJ">CJ - Conjoncture</option>
+            <option value="DF">DF - Diffusion et études</option>
+            <option value="EP">EN - Statistique d'entreprise</option>
+            <option value="EP">EP - Statistique sur l'emploi</option>
+            <option value="GE">GE - Géographie</option>
+            <option value="IF">IF - Infrastructure</option>
+            <option value="MN">MN - Statistique sur les ménages</option>
+            <option value="PL">PL - Pilotage et appui</option>
+            <option value="PX">PX - Prix</option>
+            <option value="RE">RE - Répertoire d'entreprises</option>
+            <option value="RH">RH - Ressources humaines</option>
+            <option value="RI">RI - Répertoire d'individus</option>
+            <option value="RP">RP - Recensement de la population</option>
+            <option value="ST">ST - Services statistiques</option>
+            <option value="UT">UT - Services aux utilisateurs</option>
+        </select>
+
+        <br />
+   
+        <label>Veuillez choisir un type d'espace :</label>
+        <select id="type" name="type">
+            <option value="" selected>Selection...</option>
+            <option value="data">data</option>
+            <option value="logs">logs</option>
+        </select>
+        <!-- <input type="submit" value="puis valider ici pour ajouter la sauce Samouraï..." name="submit"> -->
+    </form>
+
+    <div id="choixQuartier"></div>
+    <!-- <div id="choixQuartier" style="display:none;"></div> -->
+    <div id="choixType"></div>
+    <!-- <div id="choixType" style="display:none;"></div> -->
+
+    <hr>
+
+    <div class="container mt-5 mb-5 d-flex justify-content-center">
+        <table id="MaTable">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+
+    <script src="./function_CreaTable_ASv3.js"></script>
+    <script>
+        //initialisation variable
+        //let Data;
+
+        // fetch('./ASv3_data.json')
+        //     .then(res=>res.json())
+        //     .then(Donnees=>{
+        //         console.log(typeof Donnees[0]); // String !
+        //         //console.log(Donnees[0]);
+
+        //         Data = JSON.parse(Donnees[0]); // pour retransformer en JSON !
+        //         console.log(Data);
+
+        //         Data_CJCN = Data.filter(dat => dat.v3_quartier == "CJ" || dat.v3_quartier == "CN");
+        //         console.log(Data_CJCN);
+
+        //         getTableHead(Data_CJCN);
+        //         getTableBody(Data_CJCN);
+
+        //     })
+        //     .catch(error=>{
+        //         console.log("erreur datas");
+        //     })
+
+
+        /////////////////////////////////////////////
+
+        const fetchData = () => {
+            return new Promise((resolve, reject) => (
+                fetch("./ASv3_data.json")
+                    .then(res => res.json())
+                    .then(data => resolve(data[0]))
+                    .catch(err => reject(err))
+            ))
+        }
+
+        const fetchLogs = () => {
+            return new Promise((resolve, reject) => (
+                fetch("./ASv3_logs.json")
+                    .then(res => res.json())
+                    .then(logs => resolve(logs[0]))
+                    .catch(err => reject(err))
+            ))
+        }
+
+        async function getData() {
+            const data = await fetchData()
+            //console.log(data);
+
+            const logs = await fetchLogs()
+            //console.log(logs);
+
+
+
+            let choixQuartier = document.getElementById("choixQuartier").innerText;
+            console.log("le quartier choisi est égal à :"+choixQuartier);
+            let choixType = document.getElementById("choixType").innerText;
+            console.log("le type choisi est égal à :"+choixType);
+
+
+            let Data_Obj = JSON.parse(data); // pour retransformer en Object !
+            //console.log(Data_CJCN);
+            Data_Obj = Data_Obj.filter(dat => (dat.v3_quartier == choixQuartier && dat.v4_type == choixType)
+             /*"CJ"*/ /*|| dat.v3_quartier == "CN"*/);
+            console.log(Data_Obj);
+
+            let Logs_Obj = JSON.parse(logs); // pour retransformer en Object !
+            //console.log(Logs_CJCN);
+            Logs_Obj = Logs_Obj.filter(dat => (dat.v3_quartier == choixQuartier && dat.v4_type == choixType)
+             /*"CJ"*/ /*|| dat.v3_quartier == "CN"*/);
+            console.log(Logs_Obj);
+
+            let Ensemble_Obj = Data_Obj.concat(Logs_Obj);
+            console.log(typeof Ensemble_Obj);
+            console.log(Ensemble_Obj);
+
+            console.log(Ensemble_Obj[0].v1_date)
+
+            let Date = Ensemble_Obj[0].v1_date.split("-");
+            let libmois = [ "janvier", "février", "mars", "avril", "mai", "juin",
+                            "juillet", "août", "septembre", "octobre", "novembre", "décembre" ];
+            var mois_index =  parseInt(Date[1],10) - 1;
+            console.log("Le mois courant est " + libmois[mois_index]);
+
+            let divDate = document.getElementById("dateRef");
+            divDate.innerText = "date de référence : le " + Date[2] + " " + libmois[mois_index] + " " + Date[0];
+
+
+            getTableHead(Ensemble_Obj);
+            getTableBody(Ensemble_Obj);
+
+        }
+
+        // getData()
+
+
+        /////////////////////////////////////////////
+
+
+        let form = document.forms['my-form'];
+
+        let quartier = form.quartier;
+        let modaliteQuartier = form.quartier.options;
+        console.log(quartier);
+        console.log(modaliteQuartier);
+
+        quartier.required = true;
+
+        let type = form.type;
+        type.required = true;
+
+        // form.onsubmit = function(e){
+        //     e.preventDefault();
+        //     let optionValue = this.quartier.value;
+        //     console.log(optionValue);
+        //     // menu.onchange();
+        //     getData();
+        // }
+
+        let optionText = "";
+        let choice = "";
+
+        quartier.onchange = function() {
+            let optionValue = this.value;
+            //console.log(optionValue);
+            // let index = this.selectedIndex;
+            // optionText = this.options[index].innerText;
+            // console.log(optionText," en index n° ", index)
+            optionText = this[this.selectedIndex].value;
+
+            let choixQuartier = document.getElementById("choixQuartier");
+            choixQuartier.innerText = optionText;
+            //console.log(optionText);
+            //return optionText;
+            getData();
+        }
+
+        type.onchange = function() {
+            let optionValue = this.value;
+            //console.log(optionValue);
+            // let index = this.selectedIndex;
+            // optionText = this.options[index].innerText;
+            // console.log(optionText," en index n° ", index)
+            optionText = this[this.selectedIndex].value;
+
+            let choixType = document.getElementById("choixType");
+            choixType.innerText = optionText;
+            //console.log(optionText);
+            //return optionText;
+            getData();
+        }
+
+        choixQuartier = quartier.onchange();
+        console.log("choice quartier est egal a :"+choixQuartier);
+
+        choixType = type.onchange();
+        console.log("choice type est egal a :"+choixType);
+
+        // let choix = menu.onchange()
+        // console.log("le choix est :"+choix);
+
+        // let formSelection = document.getElementById("quartier");
+        // console.log(formSelection);
+        // let choice = formSelection.options[formSelection.selectedIndex].text;
+        // console.log("rep="+choice);
+
+
+    </script>
+
+    <script src="./function_TriTable_ASv3.js"></script>
+
+</body>
+</html>
