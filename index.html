@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport"  content="width=device-width, initial-scale=1.0">
-    <title>DocASv3</title>
+    <title>DokumentASv3</title>
     <link rel="stylesheet" href="./style_ASv3.css"/>
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
@@ -11,21 +11,31 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
       crossorigin="anonymous"></script> -->
-      <link rel="icon" type="image/x-icon" href="img/favicon-gepex.png">
+      <link rel="icon" type="image/x-icon" href="img/favicon-moon.png">
 </head>
 <body>
 
-    <p>Niveaux de consommation VV d'AppliShawarmaV3 ( Net-KEBApp )</p>
+    <div class="entete">
+        <!-- <p>Niveaux de consommation VV d'AppliShawarmaV3 <br />( Net-KEBApp )</p> -->
+        <p>Verbrauchtniveau VV von AppliShawarmaV3 <br />( Geschäft Net-KEBApp )</p>
+        <img src="./img/pngimg_shawarma2_xs.png" alt="image shawarma"/>
+    </div>
 
-    <div id="dateRef"></div>
-    
-    <br />
 
     <form name="my-form" action="">
-        <label>Veuillez choisir un quartier :</label>
+        
+        <div id="dateRef"></div>
+        <img class="pinGauche" src="./img/pngimg_pin_PNG74_xs.png" alt="image pin"/>
+        <img class="pinDroite" src="./img/pngimg_pin_PNG80_xs.png" alt="image pin"/>
+
+        <br />
+     
+        <!-- <label>Veuillez choisir un quartier :</label> -->
+        <label>Bitte wählen Sie eine Gegend :</label>
         <select id="quartier" name="quartier">
-            <option value="" selected>Selection...</option>
-            <option value="AP">AP - Services aux applications</option>
+            <!-- <option value="" selected>Selection...</option> -->
+            <option value="" selected>Auswahl...</option>
+            <!-- <option value="AP">AP - Services aux applications</option>
             <option value="CN">CN - Comptabilité nationale</option>
             <option value="CJ">CJ - Conjoncture</option>
             <option value="DF">DF - Diffusion et études</option>
@@ -41,34 +51,60 @@
             <option value="RI">RI - Répertoire d'individus</option>
             <option value="RP">RP - Recensement de la population</option>
             <option value="ST">ST - Services statistiques</option>
-            <option value="UT">UT - Services aux utilisateurs</option>
-        </select>
+            <option value="UT">UT - Services aux utilisateurs</option> -->
 
+            <option value="AP">AP - Anwendungsdienste</option>
+            <option value="CN">CN - Volkswirtschaftliche Gesamtrechnungen</option>
+            <option value="CJ">CJ - Konjunktur</option>
+            <option value="DF">DF - Verbreitung und Studien</option>
+            <option value="EP">EN - Unternehmensstatistik</option>
+            <option value="EP">EP - Beschäftigungsstatistik</option>
+            <option value="GE">GE - Geografische Lage</option>
+            <option value="IF">IF - Infrastruktur</option>
+            <option value="MN">MN - Haushaltsstatistik</option>
+            <option value="PL">PL - Lenkung und Unterstützung</option>
+            <option value="PX">PX - Preis</option>
+            <option value="RE">RE - Unternehmensregister</option>
+            <option value="RH">RH - Humanressourcen</option>
+            <option value="RI">RI - Verzeichnis der Personen</option>
+            <option value="RP">RP - Volkszählung</option>
+            <option value="ST">ST - Statistische Dienste</option>
+            <option value="UT">UT - Dienstleistungen für die Nutzer</option>
+        </select>
+        
+        <br />
         <br />
    
-        <label>Veuillez choisir un type d'espace :</label>
+        <!-- <label>Veuillez choisir un type d'espace :</label> -->
+        <label>Bitte wählen Sie einen Raumtyp : :</label>
         <select id="type" name="type">
-            <option value="" selected>Selection...</option>
+            <!-- <option value="" selected>Selection...</option> -->
+            <option value="" selected>Auswahl...</option>
             <option value="data">data</option>
             <option value="logs">logs</option>
         </select>
         <!-- <input type="submit" value="puis valider ici pour ajouter la sauce Samouraï..." name="submit"> -->
+
     </form>
 
-    <div id="choixQuartier"></div>
+    <div style="transform:translateX(-50px);" id="choixQuartier"></div>
     <!-- <div id="choixQuartier" style="display:none;"></div> -->
-    <div id="choixType"></div>
+    <div style="transform:translateX(-50px);" id="choixType"></div>
     <!-- <div id="choixType" style="display:none;"></div> -->
 
     <hr>
 
-    <div class="container mt-5 mb-5 d-flex justify-content-center">
+    <!-- <div class="container mt-5 mb-5 d-flex justify-content-center"> -->
         <table id="MaTable">
             <thead></thead>
             <tbody></tbody>
         </table>
-    </div>
+    <!-- </div> -->
 
+    <div class="piedpage">
+        <!-- <i>Création : 4nt0ni0 S3D3N0</i> -->
+        <i>Verfasser : 4nt0ni0 S3D3N0</i>
+    </div>
 
     <script src="./function_CreaTable_ASv3.js"></script>
     <script>
@@ -98,9 +134,18 @@
 
         /////////////////////////////////////////////
 
+        const fetchPeriode = () => {
+            return new Promise((resolve, reject) => (
+                fetch("./ASv3_jour_15jrs.json")
+                    .then(res => res.json())
+                    .then(data => resolve(data[0]))
+                    .catch(err => reject(err))
+            ))
+        }
+
         const fetchData = () => {
             return new Promise((resolve, reject) => (
-                fetch("./ASv3_data.json")
+                fetch("./ASv3_data_15jrs.json")
                     .then(res => res.json())
                     .then(data => resolve(data[0]))
                     .catch(err => reject(err))
@@ -109,7 +154,7 @@
 
         const fetchLogs = () => {
             return new Promise((resolve, reject) => (
-                fetch("./ASv3_logs.json")
+                fetch("./ASv3_logs_15jrs.json")
                     .then(res => res.json())
                     .then(logs => resolve(logs[0]))
                     .catch(err => reject(err))
@@ -117,12 +162,16 @@
         }
 
         async function getData() {
+
+            const periode = await fetchPeriode()
+            // console.log(typeof periode);
+            console.log(periode);
+
             const data = await fetchData()
-            //console.log(data);
+            console.log(data);
 
             const logs = await fetchLogs()
-            //console.log(logs);
-
+            console.log(logs);
 
 
             let choixQuartier = document.getElementById("choixQuartier").innerText;
@@ -131,15 +180,19 @@
             console.log("le type choisi est égal à :"+choixType);
 
 
+            let Periode_Obj = JSON.parse(periode); // pour retransformer en Object !
+            console.log(typeof Periode_Obj);
+            console.log("essai : "+Periode_Obj);
+
             let Data_Obj = JSON.parse(data); // pour retransformer en Object !
-            //console.log(Data_CJCN);
-            Data_Obj = Data_Obj.filter(dat => (dat.v3_quartier == choixQuartier && dat.v4_type == choixType)
+            //console.log(Data_Obj);
+            Data_Obj = Data_Obj.filter(dat => (dat.v2_quartier == choixQuartier && dat.v3_type == choixType)
              /*"CJ"*/ /*|| dat.v3_quartier == "CN"*/);
             console.log(Data_Obj);
 
             let Logs_Obj = JSON.parse(logs); // pour retransformer en Object !
-            //console.log(Logs_CJCN);
-            Logs_Obj = Logs_Obj.filter(dat => (dat.v3_quartier == choixQuartier && dat.v4_type == choixType)
+            //console.log(Logs_Obj);
+            Logs_Obj = Logs_Obj.filter(dat => (dat.v2_quartier == choixQuartier && dat.v3_type == choixType)
              /*"CJ"*/ /*|| dat.v3_quartier == "CN"*/);
             console.log(Logs_Obj);
 
@@ -147,19 +200,19 @@
             console.log(typeof Ensemble_Obj);
             console.log(Ensemble_Obj);
 
-            console.log(Ensemble_Obj[0].v1_date)
+            // console.log(Ensemble_Obj[0].v1_date)
 
-            let Date = Ensemble_Obj[0].v1_date.split("-");
-            let libmois = [ "janvier", "février", "mars", "avril", "mai", "juin",
-                            "juillet", "août", "septembre", "octobre", "novembre", "décembre" ];
-            var mois_index =  parseInt(Date[1],10) - 1;
-            console.log("Le mois courant est " + libmois[mois_index]);
+            // let Date = Ensemble_Obj[0].v1_date.split("-");
+            // let libmois = [ "janvier", "février", "mars", "avril", "mai", "juin",
+            //                 "juillet", "août", "septembre", "octobre", "novembre", "décembre" ];
+            // var mois_index =  parseInt(Date[1],10) - 1;
+            // console.log("Le mois courant est " + libmois[mois_index]);
 
-            let divDate = document.getElementById("dateRef");
-            divDate.innerText = "date de référence : le " + Date[2] + " " + libmois[mois_index] + " " + Date[0];
+            // let divDate = document.getElementById("dateRef");
+            // divDate.innerText = "date de référence : le " + Date[2] + " " + libmois[mois_index] + " " + Date[0];
 
 
-            getTableHead(Ensemble_Obj);
+            getTableHead(Periode_Obj,Ensemble_Obj);
             getTableBody(Ensemble_Obj);
 
         }
@@ -178,6 +231,7 @@
         console.log(modaliteQuartier);
 
         quartier.required = true;
+
 
         let type = form.type;
         type.required = true;

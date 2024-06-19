@@ -1,3 +1,4 @@
+
 function sortTable(n) {
 
     let table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -14,7 +15,7 @@ function sortTable(n) {
         rows = table.rows;
 
     /* Loop through all table rows (except the first and second, which contains table headers): */
-        for (i = 2; i < (rows.length - 1); i++) {
+        for (i = 3; i < (rows.length - 1); i++) {
             
             shouldSwitch = false;
             
@@ -25,23 +26,29 @@ function sortTable(n) {
         /* Check if the 2 rows should switch place, based on the direction, asc or desc: */
             console.log("num colonne = "+n);
             if (dir == "asc") {
-                if (n==5) {
+                if (n==2) {
+                    if (x.innerHTML=="<i>??</i>"){
+                        rows[i].parentNode.insertBefore(rows[i], rows[rows.length]);
+                    }
                     if (Number(x.innerHTML) > Number(y.innerHTML)) {
                         shouldSwitch = true; break;
                     }
                 } 
-                if (n!=5) {
+                if (n!=2) {
                     if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                         shouldSwitch = true; break;
                     }
                 }
             } else if (dir == "desc") {
-                if (n==5) {
+                if (n==2) {
+                    if (x.innerHTML=="<i>??</i>"){
+                        rows[i].parentNode.insertBefore(rows[i], rows[rows.length]);
+                    }
                     if (Number(x.innerHTML) < Number(y.innerHTML)) {
                         shouldSwitch = true; break;
                     } 
                 }
-                if (n!=5) {
+                if (n!=2) {
                     if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                         shouldSwitch = true; break;
                     }

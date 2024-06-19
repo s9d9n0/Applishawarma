@@ -1,17 +1,85 @@
 
-p {
-    padding: 10px;
-    margin: 15px;
-    font-size:xx-large;
-    font-style: italic;
+@font-face {
+    font-family: 'BoyzRGrossShadowNF';
+    src: url(./boyzrgross/BoyzRGrossShadowNF.ttf);
 }
 
+@font-face {
+    font-family: 'sf-slapstick-comic';
+    src: url(./sf-slapstick-comic/SFSlapstickComic-Bold.ttf);
+}
+
+body {
+    background-image: linear-gradient(45deg, red, green);
+}
+
+.entete {
+    display:flex;
+    vertical-align: center;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.piedpage {
+    margin : 20px 30px;
+    font-weight:bold;
+    color:white;
+}
+
+/* img {
+    width:30%;
+    height:100px;
+} */
+
+p {
+    font-family: 'sf-slapstick-comic','BoyzRGrossShadowNF', Arial, Helvetica, sans-serif;
+    padding: 10px;
+    margin: 15px;
+    font-size:50px;
+    font-style: italic;
+    font-weight: bold;
+    color:#0ee0d2;
+}
+
+/* ********************************** */
+/* ********************************** */
+
+form {
+    position:relative;
+    margin-left : 30px;
+    background-color: white;
+    padding:10px;
+    /* width:max-content; */
+    width:510px;
+    border-radius: 5px;
+    border : 2px solid black;
+    box-shadow: 10px 10px 2px 1px rgba(40, 40, 170, 0.4);
+}
+
+.pinGauche {
+    position:absolute;
+    top:-30px;
+    left:-5px;
+}
+
+.pinDroite {
+    position:absolute;
+    top:-20px;
+    left:510px;
+}
+
+/* ********************************** */
+/* ********************************** */
+
 table {
-    border-spacing: 1px;
-    width: 80%;
+    /* margin-left: 30px; */
+    border-spacing: 2px;
+    width: 98%;
     padding: 10px;
     margin: 0 10 0 10;
-    border: 1px solid black;
+    border-radius: 5px;
+    border: 2px solid black;
+    box-shadow: 10px 10px 2px 1px rgba(40, 40, 170, 0.4);
 }
 
 th {
@@ -23,6 +91,7 @@ th {
 }
 th.heure {
     font-size:15px;
+    width:20px;
 }
 
 td {
@@ -33,9 +102,9 @@ td {
     white-space: nowrap;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
+tr:nth-child(even) { background-color: #ececec; }
+
+tr:nth-child(odd)  { background-color: white; }
 
 .largeur {
     width:auto;
@@ -46,7 +115,7 @@ tr:nth-child(even) {
     text-align: center;
     height: 30px;
     font-size:15px;
-    border-left-color: 5px solid white;
+    /* border-left-color: 5px solid white; */
     color: black; /*transparent;*/
     /* padding:2px; */
     /* background-image: linear-gradient(to top, #FF0000FF 20%, #FFFFFFFF 21%); */
